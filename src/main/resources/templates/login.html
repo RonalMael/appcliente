@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:replace="layout/plantilla :: head"></head>
+
+<body>
+
+<cabezera th:replace="layout/header :: cabezera">  </cabezera>
+
+<!--  <form  method="POST"  th:action="@{/login}">
+
+ <label for="username" >Username</label>
+<input type="text" name="username" id="username" />
+<br />
+<label for="password">Password</label>
+<input type="password" name="password" id="password" />
+<br />
+<input type="submit" value="Login" />
+</form>-->
+
+    <img src="../static/img/clienteawdaw.png" alt="" class="img-fluid mx-auto d-block my-5">
+    <form  method="POST"  th:action="@{/login}">
+   <section id="login">
+   
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="text-center">Acceso Usuarios</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="index.html">
+                                <div class="form-group">
+                                    <label for="email">Usuario</label>
+                               
+                                    <input type="text" class="form-control" name="username" id="username" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                   <input type="password"  class="form-control"  name="password" id="password" />
+                                </div>
+                                
+                         
+                                <button type="submit" class="btn btn-primary w-100" value="Login"> Ingresar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </section>
+    
+     </form>
+</body>
+</html>

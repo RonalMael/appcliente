@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+
+	<section th:fragment="agregarCliente">
+
+		<div class="row">
+			<div class="card-body">
+				<div class="col-sm-12 text-right">
+					<button  class="btn btn-success" data-toggle="modal" sec:authorize="hasRole('ROLE_ADMIN')"
+						data-target="#agregarCategoria">
+						<i class="fas fa-plus"></i> Agregar
+					</button>
+					
+						<!--  - <a sec:authorize="hasRole('ROLE_ADMIN')"  th:href="@{/agregar}">[[#{persona.crear}]]</a>-->
+				</div>
+			</div>
+						
+								
+		</div>
+
+
+		<div class="modal fade" id="agregarCategoria" tabindex="-1"
+			role="dialog" aria-labelledby="EjemploModal" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header bg-success">
+						<h5 class="modal-title" id="EjemploModal" >Agregar Cliente</h5>
+						<button class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+						<form th:action="@{/guardar}" th:object="${persona}" method="post">
+
+							<div class="form-group">
+							<label form="nombre" th:text="#{persona.nombre}"></label>
+								<input type="text" class="form-control" name="nombre"
+									required="true"  placeholder="nombre"/>
+							</div>
+
+							<div class="form-group">
+							<label form="apellido" th:text="#{persona.apellido}"></label>
+								<input type="text" class="form-control" name="apellido"
+									required="true" placeholder="apellido" />
+							</div>
+
+
+							<div class="form-group">
+							<label form="email" th:text="#{persona.email}"></label>
+								<input type="text" class="form-control" name="email"
+									required="true"  placeholder="email"/>
+							</div>
+
+							<div class="form-group">
+							<label form="telefono" th:text="#{persona.telefono}"></label>
+								<input type="text" class="form-control" name="telefono"
+									required="true"  placeholder="telefono"/>
+							</div>
+							
+							
+							<div class="form-group">
+							<label>Saldo</label>
+								<input type="text" class="form-control" name="saldo"
+									required="true"  placeholder="saldo"/>
+							</div>
+
+														
+								 <div class="modal-footer">
+							<button class="btn btn-primary" type="submit" th:text="#{accion.guardar}" > <i class="fas fa-save"></i> Guardar</button>
+							</div>	
+			
+						</form>
+					</div>
+					
+						
+					</div>
+				</div>
+			</div>
+		
+
+
+	</section>
+
+
+
+
+</body>
+</html>

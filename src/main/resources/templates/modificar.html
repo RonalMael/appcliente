@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="layout/plantilla :: head"></head>
+<body>
+	<header th:replace="layout/plantilla :: header"> </header>
+	
+	<img src="../static/img/cliente.png" alt="" />
+<div class="card mt-5" >
+  <div class="card-header">
+  <!--   <a th:href="@{/}" class="btn btn-success text-white">[[#{accion.regresar}]]</a>-->
+  <h5>Editar Cliente</h5>
+  </div>
+  <div class="card-body">
+  <main role="main"> 
+ <form th:action="@{/guardar}" method="post" th:object="${persona}">
+ 
+ <!-- nombre -->
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+     <label for="nombre">[[#{persona.nombre}]]:</label>
+     <input type="text" name="nombre" class="form-control"  th:field="*{nombre}"/>
+     <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error Nombre</span>
+     
+      <div class="valid-tooltip">
+        Looks good!
+      </div>
+    </div>
+    <!-- apellido -->
+    <div class="col-md-6 mb-3">
+<label for="apellido">[[#{persona.apellido}]]:</label>
+      
+      <input type="text" name="apellido"  class="form-control" th:field="*{apellido}"/>
+      
+      <div class="valid-tooltip">
+        Looks good!
+      </div>
+    </div>
+  </div>
+  
+  <!-- -email -->
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <label for="email">[[#{persona.email}]]:</label>
+      <input type="text" name="email"  class="form-control" th:field="*{email}"/>
+      <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error Nombre</span>
+      <div class="invalid-tooltip">
+        Please provide a valid city.
+      </div>
+    </div>
+    
+    <!-- telefono -->
+    <div class="col-md-3 mb-3">
+      <label for="telefono">[[#{persona.telefono}]]:</label>
+      <input type="text" name="telefono" class="form-control" th:field="*{telefono}"/>
+      <div class="invalid-tooltip">
+        Please provide a valid zip.
+      </div>
+    </div>
+    
+    <!-- saldo -->
+    <div class="col-md-3 mb-3">
+      <label for="validationTooltip05">Saldo</label>
+        <input type="text" name="saldo" class="form-control" th:field="*{saldo}"/>
+      <div class="invalid-tooltip">
+        Please provide a valid zip.
+      </div>
+    </div>
+    
+  </div>
+  
+  <button class="btn btn-primary" type="submit" name="guardar" th:value="#{accion.guardar}"> <i class="fas fa-plus "></i> Guardar</button>
+</form>
+</main>
+  </div>
+</div>
+
+
+	<footer th:replace="layout/plantilla :: footer"></footer>
+</body>
+</html>

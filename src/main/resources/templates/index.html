@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout/plantilla :: head"></head>
+<body>
+
+	<header th:replace="layout/plantilla :: header"> </header>
+
+	<section th:replace="layout/agregarCliente :: agregarCliente"></section>
+	<!-- Button clientes -->
+	<div class="container-fluid mt-4">
+
+		<div class="row">
+
+			<div class="col-sm-12 col-md-9">
+
+
+				<div class="card">
+
+					<div class="card-header bg-dark text-white">
+						<h6>
+							<h6>
+								<i class="fas fa-shopping-card"></i> Listado Clientes
+							</h6>
+						</h6>
+					</div>
+					<div class="card-body">
+						<table class="table table-striped">
+							<tr>
+								<th scope="col">[[#{persona.nombre}]]</th>
+								<th scope="col">[[#{persona.apellido}]]</th>
+								<th scope="col">[[#{persona.email}]]</th>
+								<th scope="col">[[#{persona.telefono}]]</th>
+								<th>Saldo</th>
+
+								<th sec:authorize="hasRole('ROLE_ADMIN')">
+									[[#{accion.editar}]]</th>
+								<th sec:authorize="hasRole('ROLE_ADMIN')">[[#{accion.eliminar}]]</th>
+							</tr>
+							<tr th:each="persona : ${personas}">
+								<td th:text="${persona.nombre}"></td>
+								<td th:text="${persona.apellido}"></td>
+								<td th:text="${persona.email}">Mostrar Email</td>
+								<td th:text="${persona.telefono}">Mostrar Teléfono</td>
+								<td th:text="${persona.saldo}">Mostrar Saldo</td>
+
+								<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+									th:href="@{/editar/} + ${persona.idpersona}"
+									class="btn btn-primary text-white"
+									data-target="#agregarCategoria"> <i class="fas fa-edit"></i>
+									<!-- [[#{accion.editar}]] --></a></td>
+								<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+									th:href="@{/eliminar/} + ${persona.idpersona} "
+									class="btn btn-danger text-white"> <i
+										class="fas fa-trash-alt"></i>
+									<!--  [[#{accion.eliminar}]]--></a></td>
+
+
+							</tr>
+
+
+
+
+
+						</table>
+
+
+						<!--  -->
+
+						<ul class="nav nav-pills">
+							<li class="nav-item"
+								th:each="i : ${#numbers.sequence(0,personas.totalPages-1)}"><a
+								class="nav-link"
+								th:classappend="${currentPage}==${i}?'active':''"
+								th:href="@{/(page=${i})}" th:text="${i}"></a></li>
+						</ul>
+
+						<!--  -->
+					</div>
+				</div>
+			</div>
+
+
+			<!--Layout de 9 columnas-->
+			<div class="col-sm-12 col-md-3">
+
+				<div class="card">
+					<div class="card-header bg-dark text-white">
+						<h6>
+							<i class="fas fa-shopping-card"></i> Panel Control de Clientes
+						</h6>
+					</div>
+					<div class="card-body">
+						<!--USAMOS FLEXBOX AQUI JUSTIFY CONTENT - CONTENT AROUND-->
+						<div class="d-flex justify-content-around row-h1">
+							<div
+								class="col-sm-12 col-md-5 card py-4 bg-danger text-center text-white">
+								<!--  - <i class="fas fa-shopping-cart" style="font-size: 4rem;"></i>-->
+
+								<i class="fas fa-users" style="font-size: 4rem;"></i>
+								<h5 class="display-7">[[${totalClientes}]]</h5>
+
+							</div>
+
+							<div
+								class="col-sm-12 col-md-5 card py-4 bg-warning text-center text-white">
+
+
+								<i class="fas fa-dollar-sign" style="font-size: 4rem;"></i>
+								<h5 class="display-7">[[${saldoTotal}]]</h5>
+
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+
+
+
+
+	<!--   <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar}">[[#{persona.crear}]]</a>-->
+
+
+
+
+
+
+
+
+	<footer th:replace="layout/plantilla :: footer"></footer>
+</body>
+</html>
